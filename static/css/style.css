@@ -1,0 +1,95 @@
+:root {
+    --bg-cool-grey: #F8F9FA;
+    --pure-white: #FFFFFF;
+    --dark-teal: #005F73;
+    --deep-blue: #023E8A;
+    --healthy-teal: #2A9D8F;
+    --glaucoma-orange: #F4A261;
+    --border-light: #DEE2E6;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius: 12px;
+}
+
+body {
+    background-color: var(--bg-cool-grey);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-custom {
+    background-color: var(--dark-teal) !important;
+    box-shadow: var(--shadow);
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: var(--pure-white) !important;
+    font-weight: 600;
+}
+.navbar-custom .nav-link:hover {
+    color: var(--glaucoma-orange) !important;
+}
+
+.text-dark-teal { color: var(--dark-teal); }
+.text-glaucoma-orange { color: var(--glaucoma-orange); }
+.text-healthy-teal { color: var(--healthy-teal); }
+
+.card-custom {
+    background: var(--pure-white);
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: transform 0.2s;
+}
+.card-custom:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary-custom {
+    background-color: var(--dark-teal);
+    border: none;
+    color: white;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.btn-primary-custom:hover {
+    background-color: var(--deep-blue);
+    transform: scale(1.02);
+    color: white;
+}
+
+.badge-glaucoma {
+    background-color: var(--glaucoma-orange);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+.badge-healthy {
+    background-color: var(--healthy-teal);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.table-zebra tbody tr:nth-child(odd) {
+    background-color: #f1f3f5;
+}
+.table-zebra thead {
+    background-color: var(--dark-teal);
+    color: white;
+}
+
+.footer-custom {
+    background-color: var(--dark-teal);
+    color: var(--pure-white);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}

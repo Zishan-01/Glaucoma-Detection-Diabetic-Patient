@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Upload Report{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card-custom">
+            <h3 class="text-dark-teal">📤 Upload Glaucoma Report</h3>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Select Patient</label>
+                    <select name="patient_id" class="form-select" required>
+                        <option value="">Choose...</option>
+                        {% for p in patients %}
+                        <option value="{{ p.id }}">{{ p.full_name }} ({{ p.username }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Upload Fundus Image</label>
+                    <input type="file" name="image" class="form-control" accept="image/*" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Severity Notes (Optional)</label>
+                    <textarea name="notes" class="form-control" rows="3" placeholder="e.g., Optic disc appears pale, CDR > 0.6..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary-custom w-100">🚀 Analyze & Upload</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

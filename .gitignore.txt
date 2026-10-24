@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+
+# Database
+instance/
+glaucoma.db
+
+# AI Models (Too large for standard GitHub)
+*.keras
+*.h5
+
+# Power BI
+*.pbix

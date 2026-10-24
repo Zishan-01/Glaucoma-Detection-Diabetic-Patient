@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Report Details{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card-custom">
+            <h3 class="text-dark-teal">📄 Report Details</h3>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Patient:</strong> {{ report.patient.full_name }}</p>
+                    <p><strong>Doctor:</strong> {{ report.doctor.full_name }}</p>
+                    <p><strong>Date:</strong> {{ report.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <span class="badge {% if report.prediction == 'Glaucoma' %}badge-glaucoma{% else %}badge-healthy{% endif %}" style="font-size:1.5rem; padding:10px 30px;">
+                        {{ report.prediction }}
+                    </span>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <p><strong>AI Confidence:</strong> {{ (report.confidence * 100)|round(1) }}%</p>
+                    <p><strong>Probability Score:</strong> {{ "%.3f"|format(report.probability) }}</p>
+                    <p><strong>Threshold Used:</strong> {{ "%.3f"|format(report.probability) }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Severity Notes:</strong></p>
+                    <p class="border p-2 bg-light rounded">{{ report.severity_notes or 'No additional notes.' }}</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <img src="{{ url_for('static', filename='uploads/' + report.image_filename) }}" 
+                     class="img-fluid rounded shadow" style="max-height:400px;" alt="Fundus Image">
+            </div>
+            <div class="mt-4 text-center">
+                <a href="{{ url_for('routes.patient_dashboard' if current_user.role == 'patient' else 'routes.doctor_dashboard') }}" 
+                   class="btn btn-primary-custom">← Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
