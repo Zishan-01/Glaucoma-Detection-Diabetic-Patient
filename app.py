@@ -8,9 +8,12 @@ import os
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'your-super-secret-key-change-this-in-production'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///glaucoma.db'
+    
+    # Use /tmp for Vercel's read-only filesystem
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/glaucoma.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static/uploads')
+    app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+    os.makedirs('/tmp/uploads', exist_ok=True)
     
     db.init_app(app)
     
@@ -32,15 +35,8 @@ def create_app():
     
     return app
 
+# 🔥 THIS IS THE CRITICAL LINE VERCEL NEEDS 🔥
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     app.run(host='0.0.0.0', port=5000, debug=True)
-
-
-    # ... inside create_app() ...
-# Change the database path to /tmp
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/glaucoma.db'
-
-# Change the upload folder to /tmp
-app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
-os.makedirs('/tmp/uploads', exist_ok=True) # Ensure the directory exists
