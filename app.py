@@ -35,3 +35,12 @@ def create_app():
 if __name__ == '__main__':
     app = create_app()
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
+    # ... inside create_app() ...
+# Change the database path to /tmp
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/glaucoma.db'
+
+# Change the upload folder to /tmp
+app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+os.makedirs('/tmp/uploads', exist_ok=True) # Ensure the directory exists
